@@ -338,21 +338,21 @@ function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
 
     let xScale = d3.scaleBand()
         .domain(filteredVehicles.map(d => d.type))
-        .rangeRound([0, height])
+        .rangeRound([0, width])
         .padding(0.1);
 
     let yScale = d3.scaleLinear()
         .domain([0, d3.max(filteredVehicles, d => d.count)])
-        .range([0, width]);
+        .range([height, 0]);
 
     svg.selectAll(".bar")
         .data(filteredVehicles)
         .enter().append("rect")
         .attr("class", "bar")
-        .attr("x", d => yScale(d.type))
-        .attr("y", 0)
-        .attr("width", yScale.bandwidth())
-        .attr("height", d => xScale(d.count))
+        .attr("x", d => xScale(d.type))
+        .attr("y", d => yScale(d.count))
+        .attr("width", xScale.bandwidth())
+        .attr("height", d => height - yScale(d.count))
         .attr("fill", d => colorScale(d.count))
         .attr("class", "hover-border")
         .on('mouseover', (event, d) => {
