@@ -1,6 +1,6 @@
 var dimensions = {
     svgWidth: 600,
-    svgHeight: 600,
+    svgHeight: 1000,
     margin: {
         top: 50,
         right: 50,
@@ -332,7 +332,7 @@ function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
 
     const svg = d3.select('#barchart')
         .attr("width", dimensions.svgWidth)
-        .attr("height", dimensions.svgHeight/2)
+        .attr("height", dimensions.svgHeight)
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
