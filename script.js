@@ -157,8 +157,6 @@ function drawBoroughsChart(boroughCounts, geoData, dimensions, colorScale) {
         .attr("class", "hover-border")
         .attr("stroke", "#000")
         .on('mouseover', (event, d) => {
-            d3.select(this)
-                .attr("stroke", "blue")
             tooltip.transition()
                 .duration(200)
                 .style("opacity", .1);
@@ -351,8 +349,8 @@ function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
         .data(filteredVehicles)
         .enter().append("rect")
         .attr("class", "bar")
-        .attr("y", d => yScale(d.type))
-        .attr("x", 0)
+        .attr("x", d => yScale(d.type))
+        .attr("y", 0)
         .attr("height", yScale.bandwidth())
         .attr("width", d => xScale(d.count))
         .attr("fill", d => colorScale(d.count))
