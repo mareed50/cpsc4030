@@ -157,9 +157,11 @@ function drawBoroughsChart(boroughCounts, geoData, dimensions, colorScale) {
         .attr("class", "hover-border")
         .attr("stroke", "#000")
         .on('mouseover', (event, d) => {
+            d3.select(this)
+                .attr("stroke", "blue")
             tooltip.transition()
                 .duration(200)
-                .style("opacity", .9);
+                .style("opacity", .1);
             tooltip.html("<b>" + d.properties.boro_name + ":</b><br/>" + (boroughCounts[d.properties.boro_name] || 0) + " crashes")
                 .style("left", (event.pageX) + "px")
                 .style("top", (event.pageY - 28) + "px");
