@@ -332,7 +332,7 @@ function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
 
     const svg = d3.select('#barchart')
         .attr("width", dimensions.svgWidth)
-        .attr("height", dimensions.svgHeight)
+        .attr("height", dimensions.svgHeight/2)
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
