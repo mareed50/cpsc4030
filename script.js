@@ -159,7 +159,7 @@ function drawBoroughsChart(boroughCounts, geoData, dimensions, colorScale) {
         .on('mouseover', (event, d) => {
             tooltip.transition()
                 .duration(200)
-                .style("opacity", .1);
+                .style("opacity", .9);
             tooltip.html("<b>" + d.properties.boro_name + ":</b><br/>" + (boroughCounts[d.properties.boro_name] || 0) + " crashes")
                 .style("left", (event.pageX) + "px")
                 .style("top", (event.pageY - 28) + "px");
