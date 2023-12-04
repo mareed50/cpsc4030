@@ -338,12 +338,12 @@ function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    let yScale = d3.scaleBand()
+    let xScale = d3.scaleBand()
         .domain(filteredVehicles.map(d => d.type))
         .rangeRound([0, height])
         .padding(0.1);
 
-    let xScale = d3.scaleLinear()
+    let yScale = d3.scaleLinear()
         .domain([0, d3.max(filteredVehicles, d => d.count)])
         .range([0, width]);
 
