@@ -351,8 +351,8 @@ function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
         .attr("class", "bar")
         .attr("x", d => yScale(d.type))
         .attr("y", 0)
-        .attr("height", yScale.bandwidth())
-        .attr("width", d => xScale(d.count))
+        .attr("width", yScale.bandwidth())
+        .attr("height", d => xScale(d.count))
         .attr("fill", d => colorScale(d.count))
         .attr("class", "hover-border")
         .on('mouseover', (event, d) => {
