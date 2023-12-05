@@ -326,7 +326,7 @@ function drawFactorsChart(factorCounts, dimensions, colorScale) {
 };
 
 function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
-    const margin = { top: 20, right: 20, bottom: 30, left: 150 };
+    const margin = { top: 20, right: 20, bottom: 60, left: 150 };
     const width = dimensions.svgWidth - margin.left - margin.right;
     const height = dimensions.svgHeight - margin.top - margin.bottom;
 
@@ -371,7 +371,6 @@ function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
         .on('click', (event, d) => {
             alert("Vehicle name: " + d.type);
         })
-        .attr("transform", "rotate(-45)");
     
     svg.append("g")
         .call(d3.axisLeft(yScale));
