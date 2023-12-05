@@ -16,8 +16,6 @@ const colorScale = d3.scaleLinear()
     .range(["#E0F8FF", "#000080"]);
 
 const attributes = [
-    "NUMBER OF PERSONS INJURED",
-    "NUMBER OF PERSONS KILLED",
     "NUMBER OF PEDESTRIANS INJURED",
     "NUMBER OF PEDESTRIANS KILLED",
     "NUMBER OF CYCLIST INJURED",
