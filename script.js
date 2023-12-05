@@ -231,6 +231,10 @@ function drawTimesChart(timeCounts, dimensions) {
         .attr("transform", `translate(${dimensions.margin.right}, ${dimensions.margin.top})`);
 
     attributes.forEach((attr, index) => {
+        const timeData = Object.entries(timeCounts[attr]).map(d => [parseInt(d[0]), d[1]]);
+        const color = d3.schemeCategory10[index % 10];
+        drawLine(timeData, color, attr);
+
         legend.append("rect")
             .attr("x", 0)
             .attr("y", index * 20)
@@ -244,12 +248,6 @@ function drawTimesChart(timeCounts, dimensions) {
             .text(attr)
             .style("font-size", "12px")
             .attr("alignment-baseline", "middle");
-    };
-
-    attributes.forEach((attr, index) => {
-        const timeData = Object.entries(timeCounts[attr]).map(d => [parseInt(d[0]), d[1]]);
-        const color = d3.schemeCategory10[index % 10];
-        drawLine(timeData, color, attr);
     });
 
     svg.append("text")
