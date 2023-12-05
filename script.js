@@ -225,12 +225,30 @@ function drawTimesChart(timeCounts, dimensions) {
             .attr("d", line)
             .append("title")
             .text(attributeName);
-
+    };
+    
+    const legend = chart.append("g")
+        .attr("class", "legend")
+        .attr("transform", `translate(${dimensions.margin.right}, ${dimensions.margin.top})`);
 
     attributes.forEach((attr, index) => {
         const timeData = Object.entries(timeCounts[attr]).map(d => [parseInt(d[0]), d[1]]);
         const color = d3.schemeCategory10[index % 10];
         drawLine(timeData, color, attr);
+
+        legend.append("rect")
+            .attr("x", 0)
+            .attr("y", index * 20)
+            .attr("width", 15)
+            .attr("height", 15)
+            .attr("fill", color);
+
+        legend.append("text")
+            .attr("x", 20)
+            .attr("y", index * 20 + 12)
+            .text(attr)
+            .style("font-size", "12px")
+            .attr("alignment-baseline", "middle");
     });
 
     svg.append("text")
