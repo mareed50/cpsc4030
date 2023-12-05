@@ -1,11 +1,11 @@
 var dimensions = {
     svgWidth: 600,
-    svgHeight: 1000,
+    svgHeight: 600,
     margin: {
         top: 50,
-        right: 10,
+        right: 50,
         bottom: 50,
-        left: 10
+        left: 100
     }
 };
 
@@ -371,13 +371,17 @@ function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
         .on('click', (event, d) => {
             alert("Vehicle name: " + d.type);
         });
-
+        .attr("transform, rotate(-45)");
+    
     svg.append("g")
         .call(d3.axisLeft(yScale));
 
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
         .call(d3.axisBottom(xScale));
+        .selectAll("text)
+        .attr("transform", "rotate(-45)")
+        .style("text-anchor", "end");
 };
 
 // d3.csv("cleaned_crash_data_zipc.csv").then(data => {
