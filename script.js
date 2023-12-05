@@ -193,6 +193,7 @@ function drawBoroughsChart(boroughCounts, dimensions, colorScale) {
 }
 
 function drawTimesChart(timeCounts, dimensions) {
+    d3.select('#times').selectAll("*").remove();
     
     const svg = d3.select("#times")
         .attr("width", dimensions.svgWidth)
@@ -289,7 +290,8 @@ function drawTimesChart(timeCounts, dimensions) {
 };
 
 function drawBubbleChart(factorCounts, dimensions, colorScale) {
-
+    d3.select('#bubbles').selectAll("*").remove();
+    
     const svg = d3.select('#bubbles')
         .attr('width', dimensions.svgWidth)
         .attr('height', dimensions.svgHeight);
@@ -332,7 +334,7 @@ function drawBubbleChart(factorCounts, dimensions, colorScale) {
                     .style("opacity", 0);
             })
             .on('click', (event, d) => {
-                alert("Factor name: " + d.factor);
+                filterByBubble(d.factor);
             });
 
         bubbles.enter().append("circle")
@@ -409,7 +411,7 @@ function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
                 .style("opacity", 0);
         })
         .on('click', (event, d) => {
-            alert("Vehicle name: " + d.type);
+            filterByVehicle(d.type);
         });
 
     svg.append("g")
@@ -422,43 +424,3 @@ function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
         .attr("transform", "rotate(-30)")
         .style("text-anchor", "end");
 };
-// d3.csv("cleaned_crash_data_zipc.csv").then(data => {
-
-//     var svgWidth = 600, svgHeight = 400;
-//     var padding = { top: 20, right: 40, bottom: 30, left: 50 };
-
-//     // Create SVG element
-//     var svg = d3.select('#funny') // This should be the selector to the element where you want to append the SVG
-//         .attr('width', svgWidth)
-//         .attr('height', svgHeight);
-
-//     // Set up scales
-//     var xScale = d3.scaleLinear()
-//         .domain(d3.extent(data, function (d) { return d.LONGITUDE; }))
-//         .range([padding.left, svgWidth - padding.right]);
-
-//     var yScale = d3.scaleLinear()
-//         .domain(d3.extent(data, function (d) { return d.LATITUDE; }))
-//         .range([svgHeight - padding.bottom, padding.top]);
-
-//     // Add X axis
-//     svg.append('g')
-//         .attr('transform', 'translate(0,' + (svgHeight - padding.bottom) + ')')
-//         .call(d3.axisBottom(xScale));
-
-//     // Add Y axis
-//     svg.append('g')
-//         .attr('transform', 'translate(' + padding.left + ',0)')
-//         .call(d3.axisLeft(yScale));
-
-//     // Add dots
-//     svg.append('g')
-//         .selectAll('dot')
-//         .data(data)
-//         .enter()
-//         .append('circle')
-//         .attr('cx', function (d) { return xScale(d.LONGITUDE); })
-//         .attr('cy', function (d) { return yScale(d.LATITUDE); })
-//         .attr('r', 3) // Radius of the dots
-//         .style('fill', '#69b3a2');
-// });
