@@ -227,7 +227,7 @@ function drawTimesChart(timeCounts, dimensions) {
     
     const legend = svg.append("g")
         .attr("class", "legend")
-        .attr("transform", `translate(${chartWidth + 20}, ${dimensions.margin.top})`);
+        .attr("transform", `translate(${chartWidth + 170}, ${dimensions.margin.top})`);
 
     attributes.forEach((attr, index) => {
         const timeData = Object.entries(timeCounts[attr]).map(d => [parseInt(d[0]), d[1]]);
