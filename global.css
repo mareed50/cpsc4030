@@ -23,6 +23,6 @@
   }
   
   .hover-border:hover {
-    stroke: red; /* SVG elements use 'stroke' instead of 'border' */
-    stroke-width: 3px; /* Makes the stroke 'bold' */
+    stroke: orange; /* SVG elements use 'stroke' instead of 'border' */
+    stroke-width: 1px; /* Makes the stroke 'bold' */
   }
