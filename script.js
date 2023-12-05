@@ -180,7 +180,7 @@ function drawTimesChart(timeCounts, dimensions) {
         .attr("width", dimensions.svgWidth)
         .attr("height", dimensions.svgHeight);
 
-    dimensions.margin.right = dimensions.margin.right + 50;
+    dimensions.margin.right = dimensions.margin.right + 150;
     const chartWidth = dimensions.svgWidth - dimensions.margin.left - dimensions.margin.right;
     const chartHeight = dimensions.svgHeight - dimensions.margin.top - dimensions.margin.bottom;
 
