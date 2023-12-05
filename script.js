@@ -85,7 +85,7 @@ function boroughCount(data) {
 
 function timesCount(data) {
     let timeAttributesCounts = {};
-
+    
     attributes.forEach(attr => {
         timeAttributesCounts[attr] = {};
         for (let i = 0; i < 24; i++) {
@@ -252,23 +252,25 @@ function drawTimesChart(timeCounts, dimensions) {
         .attr("transform", `translate(${dimensions.margin.left}, ${dimensions.margin.top})`);
 
     attributes.forEach((attr, index) => {
-        const timeData = Object.entries(timeCounts[attr]).map(d => [parseInt(d[0]), d[1]]);
-        const color = d3.schemeCategory10[index % 10];
-        drawLine(timeData, color, attr);
-
-        legend.append("rect")
-            .attr("x", 0)
-            .attr("y", index * 20)
-            .attr("width", 15)
-            .attr("height", 15)
-            .attr("fill", color);
-
-        legend.append("text")
-            .attr("x", 20)
-            .attr("y", index * 20 + 12)
-            .text(attr)
-            .style("font-size", "12px")
-            .attr("alignment-baseline", "middle");
+        if (attr !== "NUMBER OF PERSONS KILLED" && attr !== "NUMBER OF PERSONS INJURED") {
+            const timeData = Object.entries(timeCounts[attr]).map(d => [parseInt(d[0]), d[1]]);
+            const color = d3.schemeCategory10[index % 10];
+            drawLine(timeData, color, attr);
+    
+            legend.append("rect")
+                .attr("x", 0)
+                .attr("y", index * 20)
+                .attr("width", 15)
+                .attr("height", 15)
+                .attr("fill", color);
+    
+            legend.append("text")
+                .attr("x", 20)
+                .attr("y", index * 20 + 12)
+                .text(attr)
+                .style("font-size", "12px")
+                .attr("alignment-baseline", "middle");
+        }
     });
 
     svg.append("text")
@@ -399,19 +401,19 @@ function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
         .attr("height", d => height - yScale(d.count))
         .attr("fill", d => "#FF8533")
         .attr("class", "hover-border")
-        .on('mouseover', (event, d) => {
-            tooltip.transition()
-                .duration(100)
-                .style("opacity", .9);
-            tooltip.html("<b>" + d.type + ":</b><br/>" + d.count + " crashes")
-                .style("left", (event.pageX) + "px")
-                .style("top", (event.pageY - 28) + "px");
-        })
-        .on('mouseout', () => {
-            tooltip.transition()
-                .duration(500)
-                .style("opacity", 0);
-        })
+//        .on('mouseover', (event, d) => {
+//            tooltip.transition()
+//                .duration(100)
+//                .style("opacity", .9);
+//            tooltip.html("<b>" + d.type + ":</b><br/>" + d.count + " crashes")
+//                .style("left", (event.pageX) + "px")
+//                .style("top", (event.pageY - 28) + "px");
+//        })
+//        .on('mouseout', () => {
+//            tooltip.transition()
+//                .duration(500)
+//                .style("opacity", 0);
+//        })
         .on('click', (event, d) => {
             filterByVehicle(d.type);
         });
