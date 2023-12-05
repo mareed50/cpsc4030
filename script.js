@@ -16,7 +16,7 @@ const ccolorScale = d3.scaleLinear()
     .range(["#E0F8FF", "#000080"]);
 const colorScale = d3.scaleLinear()
     .domain([0, maxCount])
-    .range(["#ffb74d", "#e65100"]);
+    .range(["#FFB74D", "#E65100"]);
     
 const attributes = [
     "NUMBER OF PERSONS INJURED",
