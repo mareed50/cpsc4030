@@ -205,8 +205,10 @@ function drawTimesChart(timeCounts, dimensions) {
     const xScale = d3.scaleLinear()
         .domain([0, 23])
         .range([0, chartWidth]);
-
-    let maxCount = Math.max(...attributes.map(attr => d3.max(Object.values(timeCounts[attr]))));
+    
+    const filteredAttributes = attributes.filter(attr =>attr !== "NUMBER OF PERSONS KILLED" && attr !== "NUMBER OF PERSONS INJURED");
+    
+    let maxCount = Math.max(...filtedAttributes.map(attr => d3.max(Object.values(timeCounts[attr]))));
 
     const yScale = d3.scaleLinear()
         .domain([0, maxCount])
