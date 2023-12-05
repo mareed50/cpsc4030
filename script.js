@@ -326,7 +326,7 @@ function drawFactorsChart(factorCounts, dimensions, colorScale) {
 };
 
 function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
-    const margin = { top: 20, right: 20, bottom: 60, left: 150 };
+    const margin = { top: 20, right: 20, bottom: 150, left: 150 };
     const width = dimensions.svgWidth - margin.left - margin.right;
     const height = dimensions.svgHeight - margin.top - margin.bottom;
 
@@ -379,7 +379,7 @@ function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
         .attr("transform", `translate(0,${height})`)
         .call(d3.axisBottom(xScale))
         .selectAll("text")
-        .attr("transform", "rotate(-45)")
+        .attr("transform", "rotate(-30)")
         .style("text-anchor", "end");
 };
 
