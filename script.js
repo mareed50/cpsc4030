@@ -244,7 +244,7 @@ function drawTimesChart(timeCounts, dimensions) {
     
     const legend = svg.append("g")
         .attr("class", "legend")
-        .attr("transform", `translate(${dimensions.margin.left} + 5, ${dimensions.margin.top})`);
+        .attr("transform", `translate(${dimensions.margin.left}, ${dimensions.margin.top})`);
 
     attributes.forEach((attr, index) => {
         const timeData = Object.entries(timeCounts[attr]).map(d => [parseInt(d[0]), d[1]]);
@@ -361,39 +361,53 @@ function drawBubbleChart(factorCounts, dimensions, colorScale) {
     }
 };
 
-function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
-    const margin = { top: 20, right: 20, bottom: 150, left: 150 };
-    const width = dimensions.svgWidth - margin.left - margin.right;
-    const height = dimensions.svgHeight - margin.top - margin.bottom;
+function drawVehiclesChart(filteredVehicles) {
+
+    var dimensions = {
+        svgWidth: 1450,
+        svgHeight: 170,
+        margin: {
+            top: 20, right: 20, bottom: 30, left: 150
+        },
+        width: 1450 - (150 + 20),
+        height: 170 - (20 + 30)
+    };
+
+    d3.select('#barchart').selectAll("*").remove();
 
     const svg = d3.select('#barchart')
         .attr("width", dimensions.svgWidth)
         .attr("height", dimensions.svgHeight)
         .append("g")
-        .attr("transform", `translate(${margin.left},${margin.top})`);
+        .attr("transform", `translate(${dimensions.margin.left},${dimensions.margin.top})`);
 
     let xScale = d3.scaleBand()
         .domain(filteredVehicles.map(d => d.type))
-        .rangeRound([0, width])
+        .rangeRound([0, dimensions.width])
         .padding(0.1);
 
     let yScale = d3.scaleLinear()
         .domain([0, d3.max(filteredVehicles, d => d.count)])
-        .range([height, 0]);
+        .range([dimensions.height, 0]);
 
     svg.selectAll(".bar")
         .data(filteredVehicles)
         .enter().append("rect")
-        .attr("class", "bar")
+        .attr("class", "bar hover-border")
         .attr("x", d => xScale(d.type))
         .attr("y", d => yScale(d.count))
         .attr("width", xScale.bandwidth())
-        .attr("height", d => height - yScale(d.count))
-        .attr("fill", d => "#FF8533")
-        .attr("class", "hover-border")
+        .attr("height", d => dimensions.height - yScale(d.count))
+        .attr("fill", function(d) {
+            if (selectedVehicles.includes(d.type) || selectedVehicles.length < 1) {
+                return vehicleColorScale[d.type];
+            } else {
+                return "gray"; 
+            }
+        })
         .on('mouseover', (event, d) => {
             tooltip.transition()
-                .duration(100)
+                .duration(200)
                 .style("opacity", .9);
             tooltip.html("<b>" + d.type + ":</b><br/>" + d.count + " crashes")
                 .style("left", (event.pageX) + "px")
@@ -405,20 +419,17 @@ function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
                 .style("opacity", 0);
         })
         .on('click', (event, d) => {
-            alert("Vehicle name: " + d.type);
-        })
-    
+            selectedVehicles.push(d.type);
+            filterDataByVehicle(d.type);
+        });
+
+    svg.append("g")
+        .call(d3.axisBottom(xScale))
+        .attr("transform", `translate(0,${dimensions.height})`);
+
     svg.append("g")
         .call(d3.axisLeft(yScale));
-
-    svg.append("g")
-        .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(xScale))
-        .selectAll("text")
-        .attr("transform", "rotate(-30)")
-        .style("text-anchor", "end");
 };
-
 // d3.csv("cleaned_crash_data_zipc.csv").then(data => {
 
 //     var svgWidth = 600, svgHeight = 400;
