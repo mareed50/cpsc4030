@@ -371,7 +371,7 @@ function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
         .on('click', (event, d) => {
             alert("Vehicle name: " + d.type);
         });
-        .attr("transform, rotate(-45)");
+        .attr("transform", "rotate(-45)");
     
     svg.append("g")
         .call(d3.axisLeft(yScale));
