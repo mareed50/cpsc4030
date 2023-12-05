@@ -21,9 +21,9 @@
     cursor: pointer;
 }
   
-  .hover-border:hover {
-    stroke: black; /* SVG elements use 'stroke' instead of 'border' */
-    stroke-width: 2.5px; /* Makes the stroke 'bold' */
+.hover-border:hover {
+    stroke: black;
+    stroke-width: 2.5px;
 }
 .cus-bg-color {
     background-color: #522D80;
