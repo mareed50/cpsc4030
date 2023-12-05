@@ -180,7 +180,6 @@ function drawTimesChart(timeCounts, dimensions) {
         .attr("width", dimensions.svgWidth)
         .attr("height", dimensions.svgHeight);
 
-    dimensions.margin.right = dimensions.margin.right + 150;
     const chartWidth = dimensions.svgWidth - dimensions.margin.left - dimensions.margin.right;
     const chartHeight = dimensions.svgHeight - dimensions.margin.top - dimensions.margin.bottom;
 
@@ -227,7 +226,7 @@ function drawTimesChart(timeCounts, dimensions) {
     
     const legend = svg.append("g")
         .attr("class", "legend")
-        .attr("transform", `translate(${chartWidth + 170}, ${dimensions.margin.top})`);
+        .attr("transform", `translate(${dimensions.margin.left}, ${dimensions.margin.top})`);
 
     attributes.forEach((attr, index) => {
         const timeData = Object.entries(timeCounts[attr]).map(d => [parseInt(d[0]), d[1]]);
@@ -318,7 +317,7 @@ function drawFactorsChart(factorCounts, dimensions, colorScale) {
 
         bubbles.enter().append("circle")
             .attr("r", d => radiusScale(d.count))
-            .attr("fill", d=> colorScale(d.count))
+            .attr("fill", d=> "#F56600)
             .merge(bubbles)
             .attr("cx", d => d.x)
             .attr("cy", d => d.y);
