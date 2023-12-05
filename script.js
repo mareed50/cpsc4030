@@ -148,9 +148,7 @@ function drawBoroughsChart(boroughCounts, geoData, dimensions, colorScale) {
         .enter()
         .append("path")
         .attr("d", path)
-        .attr("fill", d => {
-            const count = boroughCounts[d.properties.boro_name];
-            return colorScale(count);
+        .attr("fill", "#F56600");
         })
         .attr("class", "hover-border")
         .attr("stroke", "#000")
@@ -316,7 +314,7 @@ function drawFactorsChart(factorCounts, dimensions, colorScale) {
 
         bubbles.enter().append("circle")
             .attr("r", d => radiusScale(d.count))
-            .attr("fill", d => colorScale(d.count))
+            .attr("fill", d => "#F56600")
             .merge(bubbles)
             .attr("cx", d => d.x)
             .attr("cy", d => d.y);
