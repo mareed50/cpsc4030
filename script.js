@@ -246,7 +246,7 @@ function drawTimesChart(timeCounts, dimensions) {
     
     const legend = svg.append("g")
         .attr("class", "legend")
-        .attr("transform", `translate(${dimensions.margin.left}, ${dimensions.margin.top})`);
+        .attr("transform", `translate(${dimensions.margin.left}+5, ${dimensions.margin.top})`);
 
     attributes.forEach((attr, index) => {
         const timeData = Object.entries(timeCounts[attr]).map(d => [parseInt(d[0]), d[1]]);
@@ -363,17 +363,10 @@ function drawBubbleChart(factorCounts, dimensions, colorScale) {
     }
 };
 
-function drawVehiclesChart(filteredVehicles) {
-
-    var dimensions = {
-        svgWidth: 1450,
-        svgHeight: 170,
-        margin: {
-            top: 20, right: 20, bottom: 30, left: 150
-        },
-        width: 1450 - (150 + 20),
-        height: 170 - (20 + 30)
-    };
+function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
+    const margin = { top: 20, right: 20, bottom: 150, left: 150 };
+    const width = dimensions.svgWidth - margin.left - margin.right;
+    const height = dimensions.svgHeight - margin.top - margin.bottom;
 
     d3.select('#barchart').selectAll("*").remove();
 
@@ -400,12 +393,7 @@ function drawVehiclesChart(filteredVehicles) {
         .attr("y", d => yScale(d.count))
         .attr("width", xScale.bandwidth())
         .attr("height", d => dimensions.height - yScale(d.count))
-        .attr("fill", function(d) {
-            if (selectedVehicles.includes(d.type) || selectedVehicles.length < 1) {
-                return vehicleColorScale[d.type];
-            } else {
-                return "gray"; 
-            }
+        .attr("fill", d => "#FF8533")
         })
         .on('mouseover', (event, d) => {
             tooltip.transition()
