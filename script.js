@@ -349,9 +349,8 @@ function drawBubbleChart(factorCounts, dimensions, colorScale) {
             .attr("cy", d => d.y);
 
         bubbles.exit().remove();
-
         let labels = svg.selectAll("text")
-            .data(factors.filter(d => d.count >= labelThreshold), d => d.factor);
+            .data(factors.filter(d => d.factor);
 
         labels.enter().append("text")
             .text(d => d.factor)
