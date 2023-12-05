@@ -171,10 +171,7 @@ function drawBoroughsChart(boroughCounts, dimensions, colorScale) {
         .enter()
         .append("path")
         .attr("d", path)
-        .attr("fill", d => {
-            const count = boroughCounts[d.properties.boro_name];
-            return colorScale(count);
-        })
+        .attr("fill", d => "#FF8533")
         .attr("class", "hover-border")
         .attr("stroke", "#000")
         .on('mouseover', (event, d) => {
@@ -191,7 +188,7 @@ function drawBoroughsChart(boroughCounts, dimensions, colorScale) {
                 .style("opacity", 0);
         })
         .on('click', (event, d) => {
-            alert("Borough name: " + d.properties.boro_name);
+            filterDataByBorough(d.properties.boro_name);
         });
 }
 
@@ -392,7 +389,7 @@ function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
         .attr("y", d => yScale(d.count))
         .attr("width", xScale.bandwidth())
         .attr("height", d => height - yScale(d.count))
-        .attr("fill", d => colorScale(d.count))
+        .attr("fill", d => "#FF8533")
         .attr("class", "hover-border")
         .on('mouseover', (event, d) => {
             tooltip.transition()
