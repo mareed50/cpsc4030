@@ -11,10 +11,13 @@ var dimensions = {
 
 const maxCount = 500000;
 
-const colorScale = d3.scaleLinear()
+const ccolorScale = d3.scaleLinear()
     .domain([0, maxCount])
     .range(["#E0F8FF", "#000080"]);
-
+const colorScale = d3.scaleLinear()
+    .domain([0, maxCount])
+    .range["#E1BEE7", "#522D80"]);
+    
 const attributes = [
     "NUMBER OF PERSONS INJURED",
     "NUMBER OF PERSONS KILLED",
