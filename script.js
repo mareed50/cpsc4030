@@ -379,7 +379,7 @@ function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
         .call(d3.axisBottom(xScale));
-        .selectAll("text)
+        .selectAll("text")
         .attr("transform", "rotate(-45)")
         .style("text-anchor", "end");
 };
