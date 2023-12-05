@@ -358,8 +358,7 @@ function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
         .on('mouseover', (event, d) => {
             tooltip.transition()
                 .duration(100)
-                .style("opacity", .9)
-                .style("color", "black");
+                .style("opacity", .9);
             tooltip.html("<b>" + d.type + ":</b><br/>" + d.count + " crashes")
                 .style("left", (event.pageX) + "px")
                 .style("top", (event.pageY - 28) + "px");
