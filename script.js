@@ -57,13 +57,13 @@ function filterByLine(line){
 }
 
 function filterByBubble(factor){
-    data = data.filter(row => row['CONTRIBUTING FACTOR VEHICLE 1'] === factor || row['CONTRIBUTING FACTOR VEHICLE 2'] === factor);
-    updateVis(data);
+    let newData = globdata.filter(row => row['CONTRIBUTING FACTOR VEHICLE 1'] === factor || row['CONTRIBUTING FACTOR VEHICLE 2'] === factor);
+    updateVis(newData);
 }
 
 function filterByVehicle(vehicle){
-    data = data.filter(row => row['VEHICLE TYPE CODE 1'] === vehicle || row['VEHICLE TYPE CODE 2'] === vehicle);
-    updateVis(data);
+    let newData = globdata.filter(row => row['VEHICLE TYPE CODE 1'] === vehicle || row['VEHICLE TYPE CODE 2'] === vehicle);
+    updateVis(newData);
 }
 
 
@@ -231,23 +231,25 @@ function drawTimesChart(timeCounts, dimensions) {
     svg.selectAll(".line").remove();
     svg.selectAll(".legend").remove();
     const drawLine = (timeCounts, color, attributeName) => {
-        const line = d3.line()
-            .x(d => xScale(d[0]))
-            .y(d => yScale(d[1]));
-
-        chart.append("path")
-            .datum(timeCounts)
-            .attr("fill", "none")
-            .attr("stroke", color)
-            .attr("stroke-width", 2)
-            .attr("d", line)
-            .append("title")
-            .text(attributeName);
+        if(attributeName !== "NUMBER OF PERSONS KILLED" && attributeName !== "NUMBER OF PERSONS INJURED"){
+            const line = d3.line()
+                .x(d => xScale(d[0]))
+                .y(d => yScale(d[1]));
+    
+            chart.append("path")
+                .datum(timeCounts)
+                .attr("fill", "none")
+                .attr("stroke", color)
+                .attr("stroke-width", 2)
+                .attr("d", line)
+                .append("title")
+                .text(attributeName);
+        }
     };
     
     const legend = svg.append("g")
         .attr("class", "legend")
-        .attr("transform", `translate(${dimensions.margin.left}+5, ${dimensions.margin.top})`);
+        .attr("transform", `translate(${dimensions.margin.left}, ${dimensions.margin.top})`);
 
     attributes.forEach((attr, index) => {
         const timeData = Object.entries(timeCounts[attr]).map(d => [parseInt(d[0]), d[1]]);
