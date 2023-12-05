@@ -193,7 +193,7 @@ function drawBoroughsChart(boroughCounts, dimensions, colorScale) {
 }
 
 function drawTimesChart(timeCounts, dimensions) {
-
+    
     const svg = d3.select("#times")
         .attr("width", dimensions.svgWidth)
         .attr("height", dimensions.svgHeight);
@@ -226,7 +226,9 @@ function drawTimesChart(timeCounts, dimensions) {
     chart.append("g")
         .attr("class", "y-axis")
         .call(yAxis);
-
+    
+    svg.selectAll(".line").remove();
+    svg.selectAll(".legend").remove();
     const drawLine = (timeCounts, color, attributeName) => {
         const line = d3.line()
             .x(d => xScale(d[0]))
