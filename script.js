@@ -277,7 +277,7 @@ function drawTimesChart(timeCounts, dimensions) {
         .attr("x", dimensions.svgWidth / 2)
         .attr("y", dimensions.svgHeight - 20)
         .style("text-anchor", "middle")
-        .text("Hour of the Day")
+        .text("")
         .append("text")
         .attr("transform", "rotate(-90)")
         .attr("x", -dimensions.svgHeight / 2)
