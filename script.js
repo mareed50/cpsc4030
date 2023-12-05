@@ -317,7 +317,7 @@ function drawFactorsChart(factorCounts, dimensions, colorScale) {
 
         bubbles.enter().append("circle")
             .attr("r", d => radiusScale(d.count))
-            .attr("fill", d=> "#F56600)
+            .attr("fill", d=> "#F56600")
             .merge(bubbles)
             .attr("cx", d => d.x)
             .attr("cy", d => d.y);
