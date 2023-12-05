@@ -374,30 +374,30 @@ function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
         .attr("width", dimensions.svgWidth)
         .attr("height", dimensions.svgHeight)
         .append("g")
-        .attr("transform", `translate(${dimensions.margin.left},${dimensions.margin.top})`);
+        .attr("transform", `translate(${margin.left},${margin.top})`);
 
     let xScale = d3.scaleBand()
         .domain(filteredVehicles.map(d => d.type))
-        .rangeRound([0, dimensions.width])
+        .rangeRound([0, width])
         .padding(0.1);
 
     let yScale = d3.scaleLinear()
         .domain([0, d3.max(filteredVehicles, d => d.count)])
-        .range([dimensions.height, 0]);
+        .range([height, 0]);
 
     svg.selectAll(".bar")
         .data(filteredVehicles)
         .enter().append("rect")
-        .attr("class", "bar hover-border")
+        .attr("class", "bar")
         .attr("x", d => xScale(d.type))
         .attr("y", d => yScale(d.count))
         .attr("width", xScale.bandwidth())
-        .attr("height", d => dimensions.height - yScale(d.count))
+        .attr("height", d => height - yScale(d.count))
         .attr("fill", d => "#FF8533")
-        })
+        .attr("class", "hover-border")
         .on('mouseover', (event, d) => {
             tooltip.transition()
-                .duration(200)
+                .duration(100)
                 .style("opacity", .9);
             tooltip.html("<b>" + d.type + ":</b><br/>" + d.count + " crashes")
                 .style("left", (event.pageX) + "px")
@@ -409,16 +409,18 @@ function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
                 .style("opacity", 0);
         })
         .on('click', (event, d) => {
-            selectedVehicles.push(d.type);
-            filterDataByVehicle(d.type);
+            alert("Vehicle name: " + d.type);
         });
 
     svg.append("g")
-        .call(d3.axisBottom(xScale))
-        .attr("transform", `translate(0,${dimensions.height})`);
+        .call(d3.axisLeft(yScale));
 
     svg.append("g")
-        .call(d3.axisLeft(yScale));
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(xScale))
+        .selectAll("text")
+        .attr("transform", "rotate(-30)")
+        .style("text-anchor", "end");
 };
 // d3.csv("cleaned_crash_data_zipc.csv").then(data => {
 
