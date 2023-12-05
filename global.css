@@ -25,5 +25,5 @@
   
   .hover-border:hover {
     stroke: #F56600; /* SVG elements use 'stroke' instead of 'border' */
-    stroke-width: 1px; /* Makes the stroke 'bold' */
+    stroke-width: 2px; /* Makes the stroke 'bold' */
   }
