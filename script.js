@@ -225,7 +225,7 @@ function drawTimesChart(timeCounts, dimensions) {
             .text(attributeName);
     };
     
-    const legend = chart.append("g")
+    const legend = svg.append("g")
         .attr("class", "legend")
         .attr("transform", `translate(${chartWidth + 20}, ${dimensions.margin.top})`);
 
