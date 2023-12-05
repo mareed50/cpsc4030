@@ -32,20 +32,37 @@ const tooltip = d3.select("body").append("div")
 
 
 d3.csv("2_cleaned_crash_data.csv").then(data => {
-    const boroughCounts = bouroughCount(data);
-    const timeCounts = timesCount(data);
-    const bubbleCounts = factorsCount(data);
-    const vehicleCounts = vehiclesCount(data);
 
-    drawTimesChart(timeCounts, dimensions);
-    drawFactorsChart(bubbleCounts, dimensions, colorScale);
-    drawVehiclesChart(vehicleCounts, dimensions, colorScale);
+    //drawTimesChart(timeCounts, dimensions);
+    //drawBubbleChart(bubbleCounts, dimensions, colorScale);
+    //drawVehiclesChart(vehicleCounts, dimensions, colorScale);
 
     d3.json("Borough_Boundaries.geojson").then(geoData => {
-        drawBoroughsChart(boroughCounts, geoData, dimensions, colorScale);
+        updateVis(data)
     });
 
 });
+function updateVis(data){
+    drawBoroughsChart(boroughCount(data), geoData, dimensions, colorScale);
+    drawTimesChart(timesCount(data), dimensions)
+    drawBubbleChart(bubblesCount(data), dimensions, colorScale)
+    drawVehiclesChart(filteredVehicles, dimensions, colorScale)
+}
+
+function filterByBorough(borough){
+    data = data.filter(row => row['BOROUGH'] === borough);
+    updateVis(data);
+}
+
+function filterByBar(){
+}
+
+function filterByBubble(){
+}
+
+function filterByLine(){
+}
+
 
 function bouroughCount(data) {
     let boroughCounts = {};
@@ -85,7 +102,7 @@ function timesCount(data) {
     return timeAttributesCounts;
 }
 
-function factorsCount(data) {
+function bubblesCount(data) {
     let factorCounts = {};
 
     data.forEach(row => {
@@ -268,7 +285,7 @@ function drawTimesChart(timeCounts, dimensions) {
 
 };
 
-function drawFactorsChart(factorCounts, dimensions, colorScale) {
+function drawBubbleChart(factorCounts, dimensions, colorScale) {
 
     const svg = d3.select('#bubbles')
         .attr('width', dimensions.svgWidth)
@@ -317,7 +334,7 @@ function drawFactorsChart(factorCounts, dimensions, colorScale) {
 
         bubbles.enter().append("circle")
             .attr("r", d => radiusScale(d.count))
-            .attr("fill", d=> "#F56600")
+            .attr("fill", d=> "#FF8533")
             .merge(bubbles)
             .attr("cx", d => d.x)
             .attr("cy", d => d.y);
