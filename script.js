@@ -30,23 +30,21 @@ const tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
-
+let globdata;
+let globgeodata;
 d3.csv("2_cleaned_crash_data.csv").then(data => {
-
-    //drawTimesChart(timeCounts, dimensions);
-    //drawBubbleChart(bubbleCounts, dimensions, colorScale);
-    //drawVehiclesChart(vehicleCounts, dimensions, colorScale);
-
+    globdata = data
     d3.json("Borough_Boundaries.geojson").then(geoData => {
-        updateVis(data)
+        globgeodata = geoData
+        updateVis(globdata)
     });
-
 });
+
 function updateVis(data){
-    drawBoroughsChart(boroughCount(data), geoData, dimensions, colorScale);
+    drawBoroughsChart(boroughCount(data), dimensions, colorScale);
     drawTimesChart(timesCount(data), dimensions)
     drawBubbleChart(bubblesCount(data), dimensions, colorScale)
-    drawVehiclesChart(filteredVehicles, dimensions, colorScale)
+    drawVehiclesChart(vehiclesCount(data), dimensions, colorScale)
 }
 
 function filterByBorough(borough){
@@ -54,17 +52,23 @@ function filterByBorough(borough){
     updateVis(data);
 }
 
-function filterByBar(){
+function filterByLine(line){
+    //
 }
 
-function filterByBubble(){
+function filterByBubble(factor){
+    data = data.filter(row => row['CONTRIBUTING FACTOR VEHICLE 1'] === factor || row['CONTRIBUTING FACTOR VEHICLE 2'] === factor);
+    updateVis(data);
 }
 
-function filterByLine(){
+function filterByVehicle(vehicle){
+    data = data.filter(row => row['VEHICLE TYPE CODE 1'] === vehicle || row['VEHICLE TYPE CODE 2'] === vehicle);
+    updateVis(data);
 }
 
 
-function bouroughCount(data) {
+
+function boroughCount(data) {
     let boroughCounts = {};
 
     data.forEach(row => {
@@ -154,16 +158,16 @@ function vehiclesCount(data) {
     return filteredVehicles;
 }
 
-function drawBoroughsChart(boroughCounts, geoData, dimensions, colorScale) {
+function drawBoroughsChart(boroughCounts, dimensions, colorScale) {
     const svg = d3.select("#boroughs")
         .attr("width", dimensions.svgWidth)
         .attr("height", dimensions.svgHeight);
 
-    const projection = d3.geoMercator().fitSize([dimensions.svgWidth, dimensions.svgHeight], geoData);
+    const projection = d3.geoMercator().fitSize([dimensions.svgWidth, dimensions.svgHeight], globgeodata);
     const path = d3.geoPath().projection(projection);
 
     svg.selectAll("path")
-        .data(geoData.features)
+        .data(globgeodata.features)
         .enter()
         .append("path")
         .attr("d", path)
