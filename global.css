@@ -19,9 +19,12 @@
 
 .hover-border {
     cursor: pointer;
-  }
+}
   
   .hover-border:hover {
     stroke: black; /* SVG elements use 'stroke' instead of 'border' */
     stroke-width: 2.5px; /* Makes the stroke 'bold' */
-  }
+}
+.cus-bg-color {
+    background-color: #522D80;
+}
