@@ -3,9 +3,9 @@ var dimensions = {
     svgHeight: 1000,
     margin: {
         top: 50,
-        right: 50,
+        right: 10,
         bottom: 50,
-        left: 100
+        left: 10
     }
 };
 
