@@ -48,8 +48,8 @@ function updateVis(data){
 }
 
 function filterByBorough(borough){
-    data = data.filter(row => row['BOROUGH'] === borough);
-    updateVis(data);
+    let newData = globdata.filter(row => row['BOROUGH'] === borough);
+    updateVis(newData);
 }
 
 function filterByLine(line){
