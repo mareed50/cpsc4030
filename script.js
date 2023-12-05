@@ -188,7 +188,7 @@ function drawBoroughsChart(boroughCounts, dimensions, colorScale) {
                 .style("opacity", 0);
         })
         .on('click', (event, d) => {
-            filterDataByBorough(d.properties.boro_name);
+            filterByBorough(d.properties.boro_name);
         });
 }
 
@@ -244,7 +244,7 @@ function drawTimesChart(timeCounts, dimensions) {
     
     const legend = svg.append("g")
         .attr("class", "legend")
-        .attr("transform", `translate(${dimensions.margin.left}, ${dimensions.margin.top})`);
+        .attr("transform", `translate(${dimensions.margin.left} + 5, ${dimensions.margin.top})`);
 
     attributes.forEach((attr, index) => {
         const timeData = Object.entries(timeCounts[attr]).map(d => [parseInt(d[0]), d[1]]);
