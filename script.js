@@ -349,9 +349,10 @@ function drawBubbleChart(factorCounts, dimensions, colorScale) {
             .attr("cy", d => d.y);
 
         bubbles.exit().remove();
+        let largestBubbles = factors.sort((a, b) => b.count - a.count).slice(0, 10);
         let labels = svg.selectAll("text")
-            .data(factors.filter(d => d.factor);
-
+            .data(largestBubbles);
+        
         labels.enter().append("text")
             .text(d => d.factor)
             .attr("x", d => d.x)
