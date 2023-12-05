@@ -206,9 +206,7 @@ function drawTimesChart(timeCounts, dimensions) {
         .domain([0, 23])
         .range([0, chartWidth]);
     
-    const filteredAttributes = attributes.filter(attr =>attr !== "NUMBER OF PERSONS KILLED" && attr !== "NUMBER OF PERSONS INJURED");
-    
-    let maxCount = Math.max(...filtedAttributes.map(attr => d3.max(Object.values(timeCounts[attr]))));
+    let maxCount = Math.max(...attributes.map(attr => d3.max(Object.values(timeCounts[attr]))));
 
     const yScale = d3.scaleLinear()
         .domain([0, maxCount])
@@ -251,7 +249,7 @@ function drawTimesChart(timeCounts, dimensions) {
     
     const legend = svg.append("g")
         .attr("class", "legend")
-        .attr("transform", `translate(${dimensions.margin.left}, ${dimensions.margin.top})`);
+        .attr("transform", `translate(${dimensions.margin.left+5}, ${dimensions.margin.top})`);
 
     attributes.forEach((attr, index) => {
         if (attr !== "NUMBER OF PERSONS KILLED" && attr !== "NUMBER OF PERSONS INJURED") {
