@@ -30,13 +30,24 @@ const tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
-let globdata;
-let globgeodata;
+let cleanData;
+let geoJson;
 d3.csv("2_cleaned_crash_data.csv").then(data => {
-    globdata = data
-    d3.json("Borough_Boundaries.geojson").then(geoData => {
-        globgeodata = geoData
-        updateVis(globdata)
+    //Commented out to test updateVis instead for functionality.
+    //const boroughCounts = boroughCount(data);
+    //const timeCounts = timesCount(data);
+    //const bubbleCounts = factorsCount(data);
+    //const vehicleCounts = vehiclesCount(data);
+    //drawBoroughsChart(boroughCount(data), dimensions, colorScale);
+    //drawTimesChart(timesCount(data), dimensions)
+    //drawBubbleChart(bubblesCount(data), dimensions, colorScale)
+    //drawVehiclesChart(vehiclesCount(data), dimensions, colorScale)
+    
+    cleanData = data
+    
+    d3.json("Borough_Boundaries.geojson").then(data2 => {
+        geoJson = data2
+        updateVis(cleanData)
     });
 });
 
@@ -48,21 +59,17 @@ function updateVis(data){
 }
 
 function filterByBorough(borough){
-    let newData = globdata.filter(row => row['BOROUGH'] === borough);
+    let newData = cleanData.filter(row => row['BOROUGH'] === borough);
     updateVis(newData);
 }
 
-function filterByLine(line){
-    //
-}
-
 function filterByBubble(factor){
-    let newData = globdata.filter(row => row['CONTRIBUTING FACTOR VEHICLE 1'] === factor || row['CONTRIBUTING FACTOR VEHICLE 2'] === factor);
+    let newData = cleanData.filter(row => row['CONTRIBUTING FACTOR VEHICLE 1'] === factor || row['CONTRIBUTING FACTOR VEHICLE 2'] === factor);
     updateVis(newData);
 }
 
 function filterByVehicle(vehicle){
-    let newData = globdata.filter(row => row['VEHICLE TYPE CODE 1'] === vehicle || row['VEHICLE TYPE CODE 2'] === vehicle);
+    let newData = cleanData.filter(row => row['VEHICLE TYPE CODE 1'] === vehicle || row['VEHICLE TYPE CODE 2'] === vehicle);
     updateVis(newData);
 }
 
@@ -163,11 +170,11 @@ function drawBoroughsChart(boroughCounts, dimensions, colorScale) {
         .attr("width", dimensions.svgWidth)
         .attr("height", dimensions.svgHeight);
 
-    const projection = d3.geoMercator().fitSize([dimensions.svgWidth, dimensions.svgHeight], globgeodata);
+    const projection = d3.geoMercator().fitSize([dimensions.svgWidth, dimensions.svgHeight], geoJson);
     const path = d3.geoPath().projection(projection);
 
     svg.selectAll("path")
-        .data(globgeodata.features)
+        .data(geoJson.features)
         .enter()
         .append("path")
         .attr("d", path)
@@ -401,19 +408,6 @@ function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
         .attr("height", d => height - yScale(d.count))
         .attr("fill", d => "#FF8533")
         .attr("class", "hover-border")
-//        .on('mouseover', (event, d) => {
-//            tooltip.transition()
-//                .duration(100)
-//                .style("opacity", .9);
-//            tooltip.html("<b>" + d.type + ":</b><br/>" + d.count + " crashes")
-//                .style("left", (event.pageX) + "px")
-//                .style("top", (event.pageY - 28) + "px");
-//        })
-//        .on('mouseout', () => {
-//            tooltip.transition()
-//                .duration(500)
-//                .style("opacity", 0);
-//        })
         .on('click', (event, d) => {
             filterByVehicle(d.type);
         });
