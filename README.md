@@ -7,6 +7,7 @@ Project Website:
 https://mareed50.github.io/cpsc4030/
 
 Project Video:
+https://youtu.be/_2FsYVWxMQw
 
 ## Included Files
 - **Project Report.pdf**
