@@ -6,9 +6,7 @@ Group Members: Michael Reed
 Project Website:
 
 ## Included Files
-- **assets**: folder containing images and other items embedded into the project website
 - **Borough_Boundaries.geojson**
--  **authors.html**: Website page including author information
 -  **bubble_clean.ipynb**: Jupyter notebook used to clean data for bubble chart
 -  **bubblechart.js**: code for bubble chart visualization
 - **cleaned_crash_data_zipc.csv**: Cleaned up version of dataset
@@ -16,7 +14,7 @@ Project Website:
 - **deadly_crash_data.csv**: original csv file, originally cut out more data 
 - **global.css**: Style sheet
 - **index.html**: Main website page
-- **index2.html**:
+- **index3.html**: Unused testing website page
 - **script.js**: code for map visualization
 
 ## Citations
