@@ -10,12 +10,11 @@ Project Video:
 https://youtu.be/_2FsYVWxMQw
 
 ## Included Files
-- **Project Report.pdf**: Final report for project
+- **CPSC 4030 - Project Report.pdf**: Final report for project
 - **Borough_Boundaries.geojson**: Geojson of the borough boundaries
 - **2_cleaned_crash_data_zipc.csv**: Cleaned up version of dataset
 - **global.css**: Style sheet
 - **index.html**: Main website page
-- **index3.html**: Unused testing website page
 - **script.js**: code for map visualization
 
 ## Dataset
