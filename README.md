@@ -1,17 +1,17 @@
-# Navigating Road Safety: A Data-Driven Exploration of Motor Vehicle Collisions in NYC
+# CPSC 4030 - NYC Vehicle Collision Visualization
 Data Visualization project completed over the course of the Fall 2023 Semester
 
 Group Members: Michael Reed
 
 Project Website:
+https://mareed50.github.io/cpsc4030/
+
+Project Video:
 
 ## Included Files
+- **Project Report.pdf**
 - **Borough_Boundaries.geojson**
--  **bubble_clean.ipynb**: Jupyter notebook used to clean data for bubble chart
--  **bubblechart.js**: code for bubble chart visualization
 - **cleaned_crash_data_zipc.csv**: Cleaned up version of dataset
-- **cleaning.ipynb**: Jupyter notebook used to clean up raw data
-- **deadly_crash_data.csv**: original csv file, originally cut out more data 
 - **global.css**: Style sheet
 - **index.html**: Main website page
 - **index3.html**: Unused testing website page
