@@ -11,10 +11,6 @@ var dimensions = {
 
 const maxCount = 500000;
 
-const colorScale = d3.scaleLinear()
-    .domain([0, maxCount])
-    .range(["#E0F8FF", "#000080"]);
-
 const attributes = [
     "NUMBER OF PERSONS INJURED",
     "NUMBER OF PERSONS KILLED",
@@ -38,10 +34,10 @@ d3.csv("2_cleaned_crash_data.csv").then(data => {
     //const timeCounts = timesCount(data);
     //const bubbleCounts = factorsCount(data);
     //const vehicleCounts = vehiclesCount(data);
-    //drawBoroughsChart(boroughCount(data), dimensions, colorScale);
+    //drawBoroughsChart(boroughCount(data), dimensions);
     //drawTimesChart(timesCount(data), dimensions)
-    //drawBubbleChart(bubblesCount(data), dimensions, colorScale)
-    //drawVehiclesChart(vehiclesCount(data), dimensions, colorScale)
+    //drawBubbleChart(bubblesCount(data), dimensions)
+    //drawVehiclesChart(vehiclesCount(data), dimensions)
     
     cleanData = data
     
@@ -52,10 +48,10 @@ d3.csv("2_cleaned_crash_data.csv").then(data => {
 });
 
 function updateVis(data){
-    drawBoroughsChart(boroughCount(data), dimensions, colorScale);
+    drawBoroughsChart(boroughCount(data), dimensions);
     drawTimesChart(timesCount(data), dimensions)
-    drawBubbleChart(bubblesCount(data), dimensions, colorScale)
-    drawVehiclesChart(vehiclesCount(data), dimensions, colorScale)
+    drawBubbleChart(bubblesCount(data), dimensions)
+    drawVehiclesChart(vehiclesCount(data), dimensions)
 }
 
 function filterByBorough(borough){
@@ -165,7 +161,7 @@ function vehiclesCount(data) {
     return filteredVehicles;
 }
 
-function drawBoroughsChart(boroughCounts, dimensions, colorScale) {
+function drawBoroughsChart(boroughCounts, dimensions) {
     const svg = d3.select("#boroughs")
         .attr("width", dimensions.svgWidth)
         .attr("height", dimensions.svgHeight);
@@ -300,7 +296,7 @@ function drawTimesChart(timeCounts, dimensions) {
 
 };
 
-function drawBubbleChart(factorCounts, dimensions, colorScale) {
+function drawBubbleChart(factorCounts, dimensions) {
     d3.select('#bubbles').selectAll("*").remove();
     
     const svg = d3.select('#bubbles')
@@ -376,7 +372,7 @@ function drawBubbleChart(factorCounts, dimensions, colorScale) {
     }
 };
 
-function drawVehiclesChart(filteredVehicles, dimensions, colorScale) {
+function drawVehiclesChart(filteredVehicles, dimensions) {
     const margin = { top: 20, right: 20, bottom: 150, left: 150 };
     const width = dimensions.svgWidth - margin.left - margin.right;
     const height = dimensions.svgHeight - margin.top - margin.bottom;
