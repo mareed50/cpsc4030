@@ -18,5 +18,5 @@ https://youtu.be/_2FsYVWxMQw
 - **index3.html**: Unused testing website page
 - **script.js**: code for map visualization
 
-## Citations
+## Dataset
 NYPD. (2014). Motor Vehicle Collisions - Crashes [Dataset]. In NYC OpenData. <https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95>
